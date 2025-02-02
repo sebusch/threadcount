@@ -422,8 +422,9 @@ def _guess_multiline3(
     """
     if focus_lam is None:
         focus_lam = [np.min(x), np.max(x)]
-        focus_lam[0] = self.param_hints["g2_center"].get("min", focus_lam[0])
-        focus_lam[1] = self.param_hints["g2_center"].get("max", focus_lam[1])
+        if "g2_center" in self.param_hints.keys():
+            focus_lam[0] = self.param_hints["g2_center"].get("min", focus_lam[0])
+            focus_lam[1] = self.param_hints["g2_center"].get("max", focus_lam[1])
 
     focus_index = (x > focus_lam[0]) & (x < focus_lam[1])
 
@@ -519,8 +520,9 @@ def _guess_multiline2(
     """
     if focus_lam is None:
         focus_lam = [np.min(x), np.max(x)]
-        focus_lam[0] = self.param_hints["g2_center"].get("min", focus_lam[0])
-        focus_lam[1] = self.param_hints["g2_center"].get("max", focus_lam[1])
+        if "g2_center" in self.param_hints.keys():
+            focus_lam[0] = self.param_hints["g2_center"].get("min", focus_lam[0])
+            focus_lam[1] = self.param_hints["g2_center"].get("max", focus_lam[1])
 
     focus_index = (x > focus_lam[0]) & (x < focus_lam[1])
 
