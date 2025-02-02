@@ -356,6 +356,7 @@ def _guess_2gauss_d(
         c=constant,
     )
 
+    pars = self.reapply_certain_model_hints(pars)
     return lmfit.models.update_param_vals(pars, self.prefix, **kwargs)
 
 
@@ -406,6 +407,7 @@ def _guess_3gauss_d(
         c=constant,
     )
 
+    pars = self.reapply_certain_model_hints(pars)
     return lmfit.models.update_param_vals(pars, self.prefix, **kwargs)
 
 
@@ -465,6 +467,7 @@ def _guess_4gauss_d(
         c=constant,
     )
 
+    pars = self.reapply_certain_model_hints(pars)
     return lmfit.models.update_param_vals(pars, self.prefix, **kwargs)
 
 
@@ -542,6 +545,7 @@ def _guess_6gauss_d(
         c=constant,
     )
 
+    pars = self.reapply_certain_model_hints(pars)
     return lmfit.models.update_param_vals(pars, self.prefix, **kwargs)
 
 
@@ -598,6 +602,7 @@ def _guess_multiline2_d(
         c=constant,
     )
 
+    pars = self.reapply_certain_model_hints(pars)
     return lmfit.models.update_param_vals(pars, self.prefix, **kwargs)
 
 
@@ -658,6 +663,7 @@ def _guess_multiline3_d(
         c=constant,
     )
 
+    pars = self.reapply_certain_model_hints(pars)
     return lmfit.models.update_param_vals(pars, self.prefix, **kwargs)
 
 
@@ -720,6 +726,7 @@ def _guess_multiline4_d(
         c=constant,
     )
 
+    pars = self.reapply_certain_model_hints(pars)
     return lmfit.models.update_param_vals(pars, self.prefix, **kwargs)
 
 
@@ -798,6 +805,7 @@ def _guess_multiline6_d(
         c=constant,
     )
 
+    pars = self.reapply_certain_model_hints(pars)
     return lmfit.models.update_param_vals(pars, self.prefix, **kwargs)
 
 
@@ -859,6 +867,7 @@ def _guess_multiline4_constrained_d(
         c=constant,
     )
 
+    pars = self.reapply_certain_model_hints(pars)
     return lmfit.models.update_param_vals(pars, self.prefix, **kwargs)
 
 
@@ -930,6 +939,7 @@ def _guess_multiline6_constrained_d(
         c=constant,
     )
 
+    pars = self.reapply_certain_model_hints(pars)
     return lmfit.models.update_param_vals(pars, self.prefix, **kwargs)
 
 
