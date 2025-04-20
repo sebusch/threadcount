@@ -440,12 +440,12 @@ def _guess_multiline3(
         Initial, guessed values for the parameters of a Model.
     """
     if focus_lam is None:
-        focus_lam = [np.min(x),np.max(x)]
-        focus_lam[0] = self.param_hints['g2_center'].get('min',focus_lam[0])
-        focus_lam[1] = self.param_hints['g2_center'].get('max',focus_lam[1])
+        focus_lam = [np.min(x), np.max(x)]
+        if "g2_center" in self.param_hints.keys():
+            focus_lam[0] = self.param_hints["g2_center"].get("min", focus_lam[0])
+            focus_lam[1] = self.param_hints["g2_center"].get("max", focus_lam[1])
 
-
-    focus_index = (x > focus_lam[0]) &  (x < focus_lam[1])
+    focus_index = (x > focus_lam[0]) & (x < focus_lam[1])
 
     height, center, sigma = guess_from_peak(data[focus_index], x[focus_index])
     constant = mean_edges(data, edge_fraction=0.1)
@@ -537,12 +537,12 @@ def _guess_multiline2(
         Initial, guessed values for the parameters of a Model.
     """
     if focus_lam is None:
-        focus_lam = [np.min(x),np.max(x)]
-        focus_lam[0] = self.param_hints['g2_center'].get('min',focus_lam[0])
-        focus_lam[1] = self.param_hints['g2_center'].get('max',focus_lam[1])
+        focus_lam = [np.min(x), np.max(x)]
+        if "g2_center" in self.param_hints.keys():
+            focus_lam[0] = self.param_hints["g2_center"].get("min", focus_lam[0])
+            focus_lam[1] = self.param_hints["g2_center"].get("max", focus_lam[1])
 
-
-    focus_index = (x > focus_lam[0]) &  (x < focus_lam[1])
+    focus_index = (x > focus_lam[0]) & (x < focus_lam[1])
 
     height, center, sigma = guess_from_peak(data[focus_index], x[focus_index])
     constant = mean_edges(data, edge_fraction=0.1)
