@@ -1,6 +1,19 @@
 Changelog
 =========
 
+0.1.17 (02/02/2025)
+-------------------
+
+### Enhancement:
+* Moved the package information to pyproject.toml and updated the dependencies. Installation of dependencies should be automatic now.
+
+### Update:
+* Because we are using an old version of lmfit, I have constrained Numpy version to be <2 (v2 broke some functionality and I didn't fix it yet.)
+
+### Bug fix:
+* All threadcount guess functions now keep certain model param_hints, to aid in how we use the params in the fitting scripts.  Previously, the guess function would overwrite any vary=False value with the guess, and remove any expr constraint.  Now, if a model param hint has set vary = False and a value is present, the guessed params preserve that value.  Also, if model param hint includes expr, then that expr is preserved.
+
+
 0.1.0 (23/05/2023)
 ------------------
 
