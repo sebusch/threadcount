@@ -1,6 +1,13 @@
 Changelog
 =========
 
+0.1.3 (20/04/2025)
+------------------
+
+### Bug fixes:
+* All threadcount guess functions now keep certain model param_hints, to aid in how we use the params in the fitting scripts.  Previously, the guess function would overwrite any vary=False value with the guess, and remove any expr constraint.  Now, if a model param hint has set vary = False and a value is present, the guessed params preserve that value.  Also, if model param hint includes expr, then that expr is preserved.
+* Handle focus_lam if focus_lam is None and g2_center param hint not existing
+
 0.1.0 (23/05/2023)
 ------------------
 

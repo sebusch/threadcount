@@ -102,6 +102,15 @@ def mean_edges(y, x=None, edge_fraction=0.1):
     # return the mean of the edge points.
     return y_edges.mean()
 
+def reapply_certain_model_hints(model, params):
+    for pname, par in model.param_hints.items():
+        keys = par.keys()
+        if ('vary' in keys and par['vary'] is False and 'value' in keys):
+            params[pname].set(value = par['value'])
+        if ('expr' in keys):
+            params[pname].set(expr = par['expr'])
+        params.update_constraints()
+    return params
 
 def _guess_1gauss(self, data, x, **kwargs):
     """Estimate initial model parameter values from data.
@@ -132,6 +141,7 @@ def _guess_1gauss(self, data, x, **kwargs):
         g1_height=g1_height, g1_center=g1_center, g1_sigma=g1_sigma, c=constant,
     )
 
+    pars = self.reapply_certain_model_hints(pars)
     return lmfit.models.update_param_vals(pars, self.prefix, **kwargs)
 
 
@@ -230,7 +240,8 @@ def _guess_2gauss(
         g2_sigma=g2_sigma,
         c=constant,
     )
-
+    
+    pars = self.reapply_certain_model_hints(pars)
     return lmfit.models.update_param_vals(pars, self.prefix, **kwargs)
 
 
@@ -299,6 +310,7 @@ def _guess_2gauss_old(
         c=constant,
     )
 
+    pars = self.reapply_certain_model_hints(pars)
     return lmfit.models.update_param_vals(pars, self.prefix, **kwargs)
 
 
@@ -381,6 +393,7 @@ def _guess_3gauss(
         c=constant,
     )
 
+    pars = self.reapply_certain_model_hints(pars)
     return lmfit.models.update_param_vals(pars, self.prefix, **kwargs)
 
 def _guess_multiline3(
@@ -440,12 +453,12 @@ def _guess_multiline3(
         Initial, guessed values for the parameters of a Model.
     """
     if focus_lam is None:
-        focus_lam = [np.min(x),np.max(x)]
-        focus_lam[0] = self.param_hints['g2_center'].get('min',focus_lam[0])
-        focus_lam[1] = self.param_hints['g2_center'].get('max',focus_lam[1])
+        focus_lam = [np.min(x), np.max(x)]
+        if "g2_center" in self.param_hints.keys():
+            focus_lam[0] = self.param_hints["g2_center"].get("min", focus_lam[0])
+            focus_lam[1] = self.param_hints["g2_center"].get("max", focus_lam[1])
 
-
-    focus_index = (x > focus_lam[0]) &  (x < focus_lam[1])
+    focus_index = (x > focus_lam[0]) & (x < focus_lam[1])
 
     height, center, sigma = guess_from_peak(data[focus_index], x[focus_index])
     constant = mean_edges(data, edge_fraction=0.1)
@@ -478,6 +491,7 @@ def _guess_multiline3(
         c=constant,
     )
 
+    pars = self.reapply_certain_model_hints(pars)
     return lmfit.models.update_param_vals(pars, self.prefix, **kwargs)
 
 def _guess_multiline2(
@@ -537,12 +551,12 @@ def _guess_multiline2(
         Initial, guessed values for the parameters of a Model.
     """
     if focus_lam is None:
-        focus_lam = [np.min(x),np.max(x)]
-        focus_lam[0] = self.param_hints['g2_center'].get('min',focus_lam[0])
-        focus_lam[1] = self.param_hints['g2_center'].get('max',focus_lam[1])
+        focus_lam = [np.min(x), np.max(x)]
+        if "g2_center" in self.param_hints.keys():
+            focus_lam[0] = self.param_hints["g2_center"].get("min", focus_lam[0])
+            focus_lam[1] = self.param_hints["g2_center"].get("max", focus_lam[1])
 
-
-    focus_index = (x > focus_lam[0]) &  (x < focus_lam[1])
+    focus_index = (x > focus_lam[0]) & (x < focus_lam[1])
 
     height, center, sigma = guess_from_peak(data[focus_index], x[focus_index])
     constant = mean_edges(data, edge_fraction=0.1)
@@ -572,6 +586,7 @@ def _guess_multiline2(
         c=constant,
     )
 
+    pars = self.reapply_certain_model_hints(pars)
     return lmfit.models.update_param_vals(pars, self.prefix, **kwargs)
 
 
@@ -661,6 +676,7 @@ def _guess_3gauss_old(
         c=constant,
     )
 
+    pars = self.reapply_certain_model_hints(pars)
     return lmfit.models.update_param_vals(pars, self.prefix, **kwargs)
 
 
@@ -737,6 +753,7 @@ class GaussianModelH(lmfit.Model):
         height, center, sigma = guess_from_peak(data, x, negative=negative)
         pars = self.make_params(height=height, center=center, sigma=sigma)
 
+        pars = self.reapply_certain_model_hints(pars)
         return lmfit.models.update_param_vals(pars, self.prefix, **kwargs)
 
     __init__.__doc__ = lmfit.models.COMMON_INIT_DOC
@@ -1176,6 +1193,7 @@ class Log10_DoubleExponentialModel(lmfit.model.CompositeModel):
             e2_decay=e2_decay,
         )
 
+        pars = self.reapply_certain_model_hints(pars)
         return lmfit.models.update_param_vals(pars, self.prefix, **kwargs)
 
     __init__.__doc__ = lmfit.models.COMMON_INIT_DOC
