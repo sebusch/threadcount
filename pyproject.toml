@@ -4,3 +4,42 @@ requires = [
     "wheel"
 ]
 build-backend = "setuptools.build_meta"
+
+[project]
+name = "threadcount"
+description = "Astronomy data cube spectral line fitting"
+readme = "README.md"
+requires-python = ">=3.6"
+license = {file = "LICENSE"}
+authors = [
+    {name = "FisherAstronomy", email = "dfisher@swin.edu.au"}
+]
+keywords = ["astronomy", "data", "cube", "spectral", "line", "fitting"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent"
+]
+dependencies = [
+    "lmfit @ git+https://github.com/sebusch/light-lmfit-py.git@light_dev#egg=lmfit",
+    "matplotlib >= 3.4.3",
+    "mpdaf >= 3.5",
+    "numpy >= 1.17.0,<2",
+    "astropy >= 3.2.1",
+    "numdifftools",
+    "numba",
+    "scipy",
+    "ipython",
+    "notebook",
+    "jupyterlab",
+    "pandas"
+]
+dynamic = ["version"]
+
+[project.urls]
+homepage = "https://threadcount.readthedocs.io"
+source = "https://github.com/FisherAstronomy/threadcount"
+issues = "https://github.com/FisherAstronomy/threadcount/issues"
+
+[tool.setuptools.dynamic]
+version = {attr = "threadcount.__version__"}
