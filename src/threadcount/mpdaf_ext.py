@@ -261,8 +261,8 @@ def lmfit(self, model, **kwargs):
             except ValueError:
                 modelresult = None
     except Exception:
-    	modelresult = None
-    	
+        modelresult = None
+
     return modelresult
 
 
