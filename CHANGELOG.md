@@ -1,6 +1,13 @@
 Changelog
 =========
 
+0.1.18 (22/08/2025)
+-------------------
+
+### Bug fix:
+* reapply_certain_model_hints was improperly called.
+
+
 0.1.17 (02/02/2025)
 -------------------
 
